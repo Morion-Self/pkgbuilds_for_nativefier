@@ -21,10 +21,16 @@ build() {
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
-      --internal-urls "(.*?notion\.so.*?)"
+      --internal-urls "(.*?notion\.so.*?)" \
+      --electron-version 12.0.2
 }
 
 package() {
+    # удаляем главное меню, которое появляется по нажатию Alt
+    # Для этого в строчку №5078 вставляем: `mainWindow.removeMenu();`
+    # номер строки может измениться, когда обновится electron. Тогда надо искать строчку return mainWindow и вставлять этот код перед ней
+    sed -i '5078 i mainWindow.removeMenu();' $_instname-linux-x64/resources/app/lib/main.js
+    
     install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
     install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
 
