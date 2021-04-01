@@ -16,11 +16,14 @@ sha256sums=('1ea7c73755992387e9fd8309532ccbb6f3c945d6b96739caffda2128ac0afb86'
 
 _instname=YandexMail
 
+# --user-agent нужен, без него вход в сервисы гугл (а возможно и в другие) не пускает. ругается, типа старый бразуер.
+# возможно, со временем можно обновлять версию firefox, но пока вроде работает
 build() {
     nativefier "https://mail.yandex.ru/" \
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
+      --user-agent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0" \
       --internal-urls "(.*?mail\.yandex\.ru.*?)" \
       --electron-version 12.0.2
 }

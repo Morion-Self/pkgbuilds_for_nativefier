@@ -16,14 +16,18 @@ sha256sums=('b6ade1c13d0f7cbab5bcba9071463293ea5a8251dd693dde80148dc6b6980b42'
 
 _instname=GoogleCalendar
 
+# --user-agent нужен, без него вход в сервисы гугл (а возможно и в другие) не пускает. ругается, типа старый бразуер.
+# возможно, со временем можно обновлять версию firefox, но пока вроде работает
 build() {
     nativefier "https://calendar.google.com/" \
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
+      --user-agent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0" \
       --internal-urls "(.*?calendar\.google\.com.*?|.*?accounts\.google\.com.*?)" \
       --electron-version 12.0.2
 }
+
 
 package() {
     # удаляем главное меню, которое появляется по нажатию Alt
