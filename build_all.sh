@@ -9,8 +9,7 @@ for dir in ./*/
 do
     dir=${dir%*/}
     cd $dir
-    makepkg -c -f
-    sudo pacman -U --noconfirm *.pkg.tar.zst
+    makepkg -c -f -i --noconfirm
     rm *.pkg.tar.zst
     cd ..
 done
