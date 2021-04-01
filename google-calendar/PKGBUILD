@@ -1,0 +1,37 @@
+# Maintainer: Marat Talipov <t-marat@yandex.ru>
+# Based on package "google-docs-nativefier"
+
+pkgname=google-calendar-nativefier-by-morion
+pkgver=21.04.01
+pkgrel=1
+pkgdesc="by Morion"
+arch=(x86_64)
+license=(MIT)
+url=https://calendar.google.com
+source=($pkgname.png
+        $pkgname.desktop)
+makedepends=(nodejs nodejs-nativefier npm unzip)
+sha256sums=('b6ade1c13d0f7cbab5bcba9071463293ea5a8251dd693dde80148dc6b6980b42'
+            'cdb4ab14e0ab9a286384c0f979e90c311aa62a83ed701c2624eecede623739e9')
+
+_instname=GoogleCalendar
+
+build() {
+    nativefier "https://calendar.google.com/" \
+      --icon $pkgname.png \
+      --maximize \
+      --name "$_instname" \
+      --internal-urls "(.*?calendar\.google\.com.*?|.*?accounts\.google\.com.*?)" \
+      --single-instance 
+}
+
+package() {
+    install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
+    install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
+
+    cp -rL $_instname-linux-* "$pkgdir"/opt/$pkgname
+    ln -sf /opt/$pkgname/$_instname "$pkgdir"/usr/bin/$_instname
+    ln -sf /opt/$pkgname/resources/app/icon.png "$pkgdir"/usr/share/pixmaps/$_instname.png
+
+    chmod 666 "$pkgdir"/opt/$pkgname/resources/app/nativefier.json
+}

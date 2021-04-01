@@ -1,0 +1,37 @@
+# Maintainer: Marat Talipov <t-marat@yandex.ru>
+# Based on package "google-docs-nativefier"
+
+pkgname=yandex-mail-nativefier-by-morion
+pkgver=1
+pkgrel=2
+pkgdesc="by Morion"
+arch=(x86_64)
+license=(MIT)
+url=https://mail.yandex.ru
+source=($pkgname.png
+        $pkgname.desktop)
+makedepends=(nodejs nodejs-nativefier npm unzip)
+sha256sums=('1ea7c73755992387e9fd8309532ccbb6f3c945d6b96739caffda2128ac0afb86'
+            '0576ce7e1a22e8ba2ae186c03a82776dbe5862bf07aa0e63a158e32cb7481136')
+
+_instname=YandexMail
+
+build() {
+    nativefier "https://mail.yandex.ru/" \
+      --icon $pkgname.png \
+      --maximize \
+      --name "$_instname" \
+      --internal-urls "(.*?mail\.yandex\.ru.*?)" \
+      --single-instance 
+}
+
+package() {
+    install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
+    install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
+
+    cp -rL $_instname-linux-* "$pkgdir"/opt/$pkgname
+    ln -sf /opt/$pkgname/$_instname "$pkgdir"/usr/bin/$_instname
+    ln -sf /opt/$pkgname/resources/app/icon.png "$pkgdir"/usr/share/pixmaps/$_instname.png
+
+    chmod 666 "$pkgdir"/opt/$pkgname/resources/app/nativefier.json
+}

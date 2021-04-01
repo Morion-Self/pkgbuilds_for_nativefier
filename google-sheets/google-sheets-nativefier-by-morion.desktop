@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Google Sheets
+Exec=GoogleSheets
+Icon=/usr/share/pixmaps/GoogleSheets.png
+Terminal=false
+Categories=Sheets;Google;Nativefier;

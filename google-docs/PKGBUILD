@@ -1,0 +1,37 @@
+# Maintainer: Marat Talipov <t-marat@yandex.ru>
+# Based on package "google-docs-nativefier"
+
+pkgname=google-docs-nativefier-by-morion
+pkgver=21.04.01
+pkgrel=1
+pkgdesc="by Morion"
+arch=(x86_64)
+license=(MIT)
+url=https://docs.google.com
+source=($pkgname.png
+        $pkgname.desktop)
+makedepends=(nodejs nodejs-nativefier npm unzip)
+sha256sums=('5231652761dce688ddd2f4b2a5b958fd5486acaa181ec239fd9d330d835b5bbb'
+            '8c35ce0e882df28de7d5112d63e5a5eeba21926c320fa46293fb9e3fee3ba222')
+
+_instname=GoogleDocs
+
+build() {
+    nativefier "https://docs.google.com/" \
+      --icon $pkgname.png \
+      --maximize \
+      --name "$_instname" \
+      --internal-urls "(.*?docs\.google\.com.*?|.*?accounts\.google\.com.*?)" \
+      --single-instance 
+}
+
+package() {
+    install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
+    install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
+
+    cp -rL $_instname-linux-* "$pkgdir"/opt/$pkgname
+    ln -sf /opt/$pkgname/$_instname "$pkgdir"/usr/bin/$_instname
+    ln -sf /opt/$pkgname/resources/app/icon.png "$pkgdir"/usr/share/pixmaps/$_instname.png
+
+    chmod 666 "$pkgdir"/opt/$pkgname/resources/app/nativefier.json
+}

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Google Docs
+Exec=GoogleDocs
+Icon=/usr/share/pixmaps/GoogleDocs.png
+Terminal=false
+Categories=Docs;Google;Nativefier;

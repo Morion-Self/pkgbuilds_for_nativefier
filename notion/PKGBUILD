@@ -1,0 +1,37 @@
+# Maintainer: Marat Talipov <t-marat@yandex.ru>
+# Based on package "google-docs-nativefier"
+
+pkgname=notion-nativefier-by-morion
+pkgver=1
+pkgrel=2
+pkgdesc="by Morion"
+arch=(x86_64)
+license=(MIT)
+url=https://notion.so
+source=($pkgname.png
+        $pkgname.desktop)
+makedepends=(nodejs nodejs-nativefier npm unzip)
+sha256sums=('214c257501451b8fee0eee8c66da8ab6a97c807d3236788fc548c613184452bc'
+            '8280ca4c607167c9bfc605e8171c6c165c1081b4855629db51dc172b812b2118')
+
+_instname=Notion
+
+build() {
+    nativefier "https://notion.so/" \
+      --icon $pkgname.png \
+      --maximize \
+      --name "$_instname" \
+      --internal-urls "(.*?notion\.so.*?)" \
+      --single-instance 
+}
+
+package() {
+    install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
+    install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
+
+    cp -rL $_instname-linux-* "$pkgdir"/opt/$pkgname
+    ln -sf /opt/$pkgname/$_instname "$pkgdir"/usr/bin/$_instname
+    ln -sf /opt/$pkgname/resources/app/icon.png "$pkgdir"/usr/share/pixmaps/$_instname.png
+
+    chmod 666 "$pkgdir"/opt/$pkgname/resources/app/nativefier.json
+}

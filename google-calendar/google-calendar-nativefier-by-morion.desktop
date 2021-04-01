@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Google Calendar
+Exec=GoogleCalendar
+Icon=/usr/share/pixmaps/GoogleCalendar.png
+Terminal=false
+Categories=Calendar;Google;Nativefier;
