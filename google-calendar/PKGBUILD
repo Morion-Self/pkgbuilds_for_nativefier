@@ -12,7 +12,7 @@ source=($pkgname.png
         $pkgname.desktop)
 makedepends=(nodejs nodejs-nativefier npm unzip)
 sha256sums=('b6ade1c13d0f7cbab5bcba9071463293ea5a8251dd693dde80148dc6b6980b42'
-            'cdb4ab14e0ab9a286384c0f979e90c311aa62a83ed701c2624eecede623739e9')
+            '5d76a5f84a4db034305ed2017146ba72f3b071942131df2481b2258fdd7e042e')
 
 _instname=GoogleCalendar
 
