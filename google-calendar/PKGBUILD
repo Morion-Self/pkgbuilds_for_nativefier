@@ -21,8 +21,7 @@ build() {
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
-      --internal-urls "(.*?calendar\.google\.com.*?|.*?accounts\.google\.com.*?)" \
-      --single-instance 
+      --internal-urls "(.*?calendar\.google\.com.*?|.*?accounts\.google\.com.*?)"
 }
 
 package() {

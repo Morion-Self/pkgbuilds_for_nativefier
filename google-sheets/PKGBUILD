@@ -21,8 +21,7 @@ build() {
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
-      --internal-urls "(.*?docs\.google\.com.*?|.*?sheets\.google\.com.*?|.*?accounts\.google\.com.*?)" \
-      --single-instance 
+      --internal-urls "(.*?docs\.google\.com.*?|.*?sheets\.google\.com.*?|.*?accounts\.google\.com.*?)" 
 }
 # коммент: выше, в internal-urls нужно включать и docs.google.com, и sheets.google.com.
 # потому что корневая страница приложения sheets.google.com, но когда открываешь док на редактирование он открывается в docs.google.com

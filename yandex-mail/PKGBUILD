@@ -21,8 +21,7 @@ build() {
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
-      --internal-urls "(.*?mail\.yandex\.ru.*?)" \
-      --single-instance 
+      --internal-urls "(.*?mail\.yandex\.ru.*?)"
 }
 
 package() {

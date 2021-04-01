@@ -21,8 +21,7 @@ build() {
       --icon $pkgname.png \
       --maximize \
       --name "$_instname" \
-      --internal-urls "(.*?notion\.so.*?)" \
-      --single-instance 
+      --internal-urls "(.*?notion\.so.*?)"
 }
 
 package() {
