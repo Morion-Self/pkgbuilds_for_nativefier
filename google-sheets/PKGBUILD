@@ -2,7 +2,7 @@
 # Based on package "google-docs-nativefier"
 
 pkgname=google-sheets-nativefier-by-morion
-pkgver=21.04.01
+pkgver=1
 pkgrel=1
 pkgdesc="by Morion"
 arch=(x86_64)

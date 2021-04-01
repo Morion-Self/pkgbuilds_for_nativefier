@@ -3,7 +3,7 @@
 
 pkgname=notion-nativefier-by-morion
 pkgver=1
-pkgrel=2
+pkgrel=1
 pkgdesc="by Morion"
 arch=(x86_64)
 license=(MIT)
