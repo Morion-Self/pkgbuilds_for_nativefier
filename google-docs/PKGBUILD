@@ -28,10 +28,9 @@ build() {
 }
 
 package() {
-    # удаляем главное меню, которое появляется по нажатию Alt
-    # Для этого в строчку №5078 вставляем: `mainWindow.removeMenu();`
-    # номер строки может измениться, когда обновится electron. Тогда надо искать строчку return mainWindow и вставлять этот код перед ней
-    sed -i '5078 i mainWindow.removeMenu();' $_instname-linux-x64/resources/app/lib/main.js
+    # 01.06.21
+    # Убираю свой патч, т.к. теперь в новой версии электрона он не работает. Там что-то поменялось, и даже если я не возвращаю mainmenu, оно все равно появляется
+    # надо разбираться позже, сейчас пора работать
 
     install -d "$pkgdir"/opt "$pkgdir"/usr/{bin,share/pixmaps}
     install -Dm644 $pkgname.desktop "$pkgdir"/usr/share/applications/$_instname.desktop
