@@ -9,7 +9,9 @@ for dir in ./*/
 do
     dir=${dir%*/}
     cd $dir
-    makepkg -c -f -i --noconfirm
-    rm *.pkg.tar.zst
+    if [ -f PKGBUILD ]; then
+        makepkg -c -f -i --noconfirm
+        rm *.pkg.tar.zst
+    fi;
     cd ..
 done
